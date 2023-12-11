@@ -32,6 +32,10 @@
 
 ##12-08-2023:             Function "pickRandomCard()" is initialized
 
+##12-11-2023:             File position changed to randomNumber. CARD_ID is not working as intended. See comments about it for more
+
+##12-11-2023:             Files "blackjack.py" and "shoe.txt" are uploaded to GitHub for ease of access. 
+
 ##Imports
 import random
 
@@ -71,19 +75,41 @@ def fillShoe():
     shoe.close()
 
 def pickRandomCard():
-    ##This function takes a random integer and selects a card id from "shoe.txt". Returns the card id to be converted to math
+    ##This function takes a random integer and selects a card id from "shoe.txt".
     ##@params: None
     ##@returns: CARD_ID
     shoe = open("shoe.txt", "r")
     randomNumber = random.randint(1,52)
-    shoeIterator = 1
-    print(randomNumber)
-    shoeLine = shoe.readline()
-    while shoeLine != shoe.seek(randomNumber):
-        shoeIterator += 1
-        shoe.seek(shoeIterator)
+    print(randomNumber) #TEST
+    print(shoe.seek(randomNumber)) ##TEST (This code works as intended)
+    
+    CARD_ID = shoe.readline() ##This code breaks. It returns a random line from the file not associated from the random number.
+    ##Ex: RandomNumber = 1, shoe.readline(), CARD_ID = 12 (2 is expected)
+    
+    print(CARD_ID)
+
+    
+    ##You need to find a way to read from the discard to tell the program that the
+    ##Number you are at is discarded or eliminated from play and to get the next
+    ##Card in the shoe. 
         
-        
+def userHit():
+    ##This function is a response to the input "hit". Will draw a random card from the shoe by calling pickRandomCard()
+    ##@params: response = ("hit")
+    ##@returns: None
+    pickRandomCard()
+
+def cpuHit():
+    ##This function is a response to the input "stand". Will draw a random card from the shoe by calling pickRandomCard()
+    ##@params: None
+    ##@returns: None
+
+
+def userStand():
+    ##This function calls cpuHit which calls pickRandomCard and will validate the points to the computer.
+    ##@params: response = ("stand")
+    ##@returns: None
+    cpuHit()
 
 def main():
     fillShoe()
