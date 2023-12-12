@@ -109,9 +109,54 @@ def userStart():
     ##@params: None
     ##@returns: cardValue
     CARD_ID = pickRandomCard()
-    
-    
+    CARD_ID = int(CARD_ID)
+    aceNumericFlag = None
 
+    clubs = 2
+    diamonds = 102
+    hearts = 202
+    spades = 302
+
+    for i in range(1,13,1):
+        if CARD_ID != clubs or CARD_ID != diamonds or CARD_ID != hearts or CARD_ID != spades:
+            print("Moving onto the next number of cards")
+            clubs += 1
+            diamonds += 1
+            hearts += 1
+            spades += 1
+        if CARD_ID == clubs or CARD_ID == diamonds or CARD_ID == hearts or CARD_ID == spades:
+            if CARD_ID == clubs:
+                cardValue = clubs
+                break
+            elif CARD_ID == diamonds:
+                cardValue = clubs
+                break
+            elif CARD_ID == hearts:
+                cardValue = clubs
+                break
+            elif CARD_ID == spades:
+                cardValue = clubs
+                break
+            
+            
+    if clubs == 11 or clubs == 12 or clubs == 13:
+        cardValue = 10
+        return cardValue
+        
+    if clubs == 14:
+        cardValue = int(input("You have an Ace! Would you want it to be a 1 or an 11?: "))
+        if cardValue != 1 and cardValue != 11:
+            aceNumericFlag = False
+        elif cardValue == 1 or cardValue == 11:
+            return cardValue
+        else:
+            aceNumericFlag = False
+    while aceNumericFlag == False:
+        cardValue = int(input("INVALID RESPONSE: Please check your answer. Would you like your ace to be a 1 or an 11?: "))
+        if cardValue == 1 or cardValue == 11:
+            aceNumericFlag = True
+    
+    return cardValue
 
 
 
