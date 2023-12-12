@@ -73,45 +73,92 @@ def fillShoe():
     for spades in range(302,315,1): #For the spade cards ID's only
         shoe.write(str(spades) + "\n")
     shoe.close()
+    pass
 
 def pickRandomCard():
     ##This function takes a random integer and selects a card id from "shoe.txt".
     ##@params: None
     ##@returns: CARD_ID
     shoe = open("shoe.txt", "r")
-    randomNumber = random.randint(1,52)
-    print(randomNumber) #TEST
-    print(shoe.seek(randomNumber)) ##TEST (This code works as intended)
+    #randomNumber = random.randint(1,52)
+    randomNumber = 1
+    shoeLineNumber = 1
+    currentCard = shoe.readline()
     
-    CARD_ID = shoe.readline() ##This code breaks. It returns a random line from the file not associated from the random number.
-    ##Ex: RandomNumber = 1, shoe.readline(), CARD_ID = 12 (2 is expected)
+    if randomNumber == shoeLineNumber:
+        currentCard = "2"
+        CARD_ID = currentCard
+        return CARD_ID
     
-    print(CARD_ID)
+    while shoeLineNumber != randomNumber:
+        currentCard = shoe.readline()
+        shoeLineNumber += 1
+    
+    CARD_ID = currentCard
+    discardCard()
+    return CARD_ID
 
+def discardCard():
+    discard = ("discard.txt", "a")
+    CARD_ID = pickRandomCard()
+    discard.append(CARD_ID)
+    discard.close()
     
-    ##You need to find a way to read from the discard to tell the program that the
-    ##Number you are at is discarded or eliminated from play and to get the next
-    ##Card in the shoe. 
-        
-def userHit():
-    ##This function is a response to the input "hit". Will draw a random card from the shoe by calling pickRandomCard()
-    ##@params: response = ("hit")
-    ##@returns: None
-    pickRandomCard()
-
-def cpuHit():
-    ##This function is a response to the input "stand". Will draw a random card from the shoe by calling pickRandomCard()
+def userStart():
+    ##This function takes the first cards for the user to be added up to value to be displayed to the user
     ##@params: None
-    ##@returns: None
+    ##@returns: cardValue
+    CARD_ID = pickRandomCard()
+    
+    
 
 
-def userStand():
-    ##This function calls cpuHit which calls pickRandomCard and will validate the points to the computer.
-    ##@params: response = ("stand")
-    ##@returns: None
-    cpuHit()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def main():
     fillShoe()
     pickRandomCard()
+
+
+
+
+    
 main()
