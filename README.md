@@ -35,3 +35,5 @@ Date:                     Description:
 12-11-2023:             File position changed to randomNumber. CARD_ID is not working as intended. See comments about it for more
 
 12-11-2023:             Files "blackjack.py" and "shoe.txt" are uploaded to GitHub for ease of access. 
+
+12-12-2023:             convertValues() is completed
